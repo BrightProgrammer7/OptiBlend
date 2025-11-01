@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miraj XR - Moroccan Cultural Heritage Cooking Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        :root {
+            --primary-color: #D4AF37;
+            --secondary-color: #8B4513;
+            --accent-color: #FF6B35;
+            --bg-dark: #1a1a1a;
+            --bg-light: #f5f5f5;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --overlay-bg: rgba(26, 26, 26, 0.85);
+            --success-color: #4CAF50;
+            --warning-color: #FF9800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Video Section - Left Side */
+        .video-section {
+            flex: 1;
+            position: relative;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #videoElement {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* XR-Style Overlays */
+        .xr-overlay {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .action-detection {
+            top: 20px;
+            left: 20px;
+            background: var(--overlay-bg);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+            display: none;
+            animation: slideInLeft 0.3s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .action-detection .action-icon {
+            font-size: 32px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .action-detection .action-text {
+            font-size: 18px;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+
+        .confidence-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            display: none;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .step-overlay {
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--overlay-bg);
+            backdrop-filter: blur(15px);
+            padding: 20px 40px;
+            border-radius: 15px;
+            border: 2px solid var(--primary-color);
+            max-width: 80%;
+            text-align: center;
+            display: none;
+            animation: slideInBottom 0.4s ease-out;
+        }
+
+        @keyframes slideInBottom {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 30px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        .step-overlay .step-title {
+            font-size: 16px;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .step-overlay .step-instruction {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* Control Panel - Right Side */
+        .control-panel {
+            width: 450px;
+            background: var(--bg-dark);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            border-left: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .panel-header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            padding: 25px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .panel-header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .panel-header .subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .recipe-info {
+            padding: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .recipe-info h2 {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .recipe-info h2 .material-icons {
+            margin-right: 10px;
+        }
+
+        .recipe-info .recipe-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .recipe-meta span {
+            display: flex;
+            align-items: center;
+        }
+
+        .recipe-meta .material-icons {
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+        /* Recipe Steps */
+        .recipe-steps {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .recipe-steps h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .recipe-steps h3 .material-icons {
+            margin-right: 8px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            border-left: 3px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .step-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+
+        .step-card.active {
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), rgba(255, 107, 53, 0.1));
+            border-left: 3px solid var(--primary-color);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .step-card.completed {
+            opacity: 0.6;
+            border-left-color: var(--success-color);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .step-card.completed .step-number {
+            background: var(--success-color);
+        }
+
+        .step-instruction {
+            font-size: 15px;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        .step-tip {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 38px;
+        }
+
+        /* Timers Section */
+        .timers-section {
+            padding: 20px;
+            background: rgba(255, 152, 0, 0.1);
+            border-top: 1px solid rgba(255, 152, 0, 0.2);
+            display: none;
+        }
+
+        .timers-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--warning-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .timers-section h3 .material-icons {
+            margin-right: 8px;
+        }
+
+        .timer-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timer-label {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .timer-countdown {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--warning-color);
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Cultural Context */
+        .cultural-section {
+            padding: 20px;
+            background: rgba(76, 175, 80, 0.1);
+            border-top: 1px solid rgba(76, 175, 80, 0.2);
+            display: none;
+        }
+
+        .cultural-section h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--success-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .cultural-section h3 .material-icons {
+            margin-right: 8px;
+        }
+
+        .cultural-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Chat Log */
+        .chat-section {
+            padding: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-section h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-section h3 .material-icons {
+            margin-right: 8px;
+        }
+
+        .chat-message {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .chat-message.assistant {
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .chat-message.user {
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .chat-message.system {
+            border-left: 3px solid var(--success-color);
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        /* Start Button */
+        .start-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .start-overlay h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Scrollbar Styling */
+        .control-panel::-webkit-scrollbar,
+        .chat-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .control-panel::-webkit-scrollbar-track,
+        .chat-section::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .control-panel::-webkit-scrollbar-thumb,
+        .chat-section::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .video-section {
+                height: 50vh;
+            }
+
+            .control-panel {
+                width: 100%;
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Video Section with XR Overlays -->
+        <div class="video-section">
+            <video id="videoElement" autoplay playsinline></video>
+            
+            <!-- Start Overlay -->
+            <div class="start-overlay" id="startOverlay">
+                <h2>🌟 Miraj XR 🌟<br>Moroccan Cultural Heritage Cooking</h2>
+                <button class="start-button" id="startButton">
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 10px;">play_circle</span>
+                    Start Cooking Session
+                </button>
+            </div>
+
+            <!-- Action Detection Overlay -->
+            <div class="xr-overlay action-detection" id="actionLabel">
+                <span class="action-icon" id="actionIcon">👨‍🍳</span>
+                <span class="action-text" id="actionText">Ready to cook</span>
+            </div>
+
+            <!-- Confidence Badge -->
+            <div class="confidence-badge" id="confidenceBadge">95% Confident</div>
+
+            <!-- Step Overlay -->
+            <div class="xr-overlay step-overlay" id="stepOverlay">
+                <div class="step-title">CURRENT STEP</div>
+                <div class="step-instruction" id="stepOverlayText">Preparing ingredients...</div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <!-- Header -->
+            <div class="panel-header">
+                <h1>MIRAJ XR</h1>
+                <div class="subtitle">Preserving Moroccan Culinary Heritage</div>
+            </div>
+
+            <!-- Recipe Info -->
+            <div class="recipe-info">
+                <h2>
+                    <span class="material-icons">restaurant</span>
+                    <span id="recipeName">Chicken Tajine</span>
+                </h2>
+                <div class="recipe-meta">
+                    <span><span class="material-icons">schedule</span> 90 min</span>
+                    <span><span class="material-icons">people</span> 4-6 servings</span>
+                    <span><span class="material-icons">local_fire_department</span> Medium</span>
+                </div>
+            </div>
+
+            <!-- Recipe Steps -->
+            <div class="recipe-steps">
+                <h3>
+                    <span class="material-icons">format_list_numbered</span>
+                    Cooking Steps
+                </h3>
+                <div id="recipeStepsContainer">
+                    <!-- Steps will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- Timers -->
+            <div class="timers-section" id="timersSection">
+                <h3>
+                    <span class="material-icons">timer</span>
+                    Active Timers
+                </h3>
+                <div id="timersContainer"></div>
+            </div>
+
+            <!-- Cultural Context -->
+            <div class="cultural-section" id="culturalSection">
+                <h3>
+                    <span class="material-icons">auto_stories</span>
+                    Cultural Context
+                </h3>
+                <p id="culturalText"></p>
+            </div>
+
+            <!-- Chat Log -->
+            <div class="chat-section">
+                <h3>
+                    <span class="material-icons">chat</span>
+                    Conversation
+                </h3>
+                <div id="chatLog"></div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="canvasElement" style="display: none;"></canvas>
+    <script src="mirajxr.js"></script>
+</body>
+</html>

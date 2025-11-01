@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miraj XR - Preserving Moroccan Culinary Heritage Through AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-brown: #8B4513;
+            --accent-orange: #FF6B35;
+            --bg-dark: #1a1a1a;
+            --bg-light: #f5f5f5;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Tajawal', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path d="M 0 400 Q 300 200 600 400 T 1200 400 L 1200 800 L 0 800 Z" fill="%23D4AF37" opacity="0.05"/></svg>') no-repeat center;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 20px;
+            max-width: 1000px;
+        }
+
+        .hero-logo {
+            font-size: 80px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .hero-tagline {
+            font-size: 32px;
+            color: var(--text-light);
+            font-weight: 300;
+            margin-bottom: 15px;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            color: white;
+            padding: 20px 50px;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--primary-gold);
+            color: var(--bg-dark);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 20px;
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 64px;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .feature-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Heritage Section */
+        .heritage {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--secondary-brown), var(--primary-gold));
+            color: var(--text-light);
+        }
+
+        .heritage-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .heritage-text h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .heritage-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .heritage-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Technology Section */
+        .technology {
+            padding: 100px 20px;
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .tech-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--primary-gold);
+        }
+
+        .tech-card h3 {
+            font-size: 20px;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tech-card h3 .material-icons {
+            margin-right: 10px;
+        }
+
+        .tech-card p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--accent-orange), var(--primary-gold));
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .cta-section h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 20px;
+            background: var(--bg-dark);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: var(--primary-gold);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-logo {
+                font-size: 48px;
+            }
+
+            .hero-tagline {
+                font-size: 24px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .heritage-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-logo">MIRAJ XR</div>
+            <h1 class="hero-tagline">حافظ على التراث المغربي من خلال الطبخ</h1>
+            <p class="hero-subtitle">Preserving Moroccan Culinary Heritage Through AI-Powered Interactive Cooking</p>
+            <div>
+                <a href="mirajxr.html" class="cta-button">
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 10px;">play_circle</span>
+                    Start Cooking
+                </a>
+                <a href="#features" class="cta-button secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Competitive Differentiators</h2>
+        <p class="section-subtitle">What makes Miraj XR unique in preserving cultural heritage through technology</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎥</div>
+                <h3 class="feature-title">Real-Time HCI</h3>
+                <p class="feature-description">Live video, speech, and action detection for immersive cooking guidance with sub-500ms latency.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏛️</div>
+                <h3 class="feature-title">Cultural Preservation</h3>
+                <p class="feature-description">Traditional dishes, tools (tajine, couscousière), proverbs, and cooking rituals preserved digitally.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🗣️</div>
+                <h3 class="feature-title">Darija-First AI</h3>
+                <p class="feature-description">Natural spoken interaction in Moroccan Arabic, making heritage accessible to all Moroccans.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">✋</div>
+                <h3 class="feature-title">Interactive Learning</h3>
+                <p class="feature-description">AI validates gestures, cooking steps, and timing with real-time corrections.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🥽</div>
+                <h3 class="feature-title">XR-Style Guidance</h3>
+                <p class="feature-description">Overlays suggestions and corrections without requiring VR headsets.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3 class="feature-title">Heritage Data Layer</h3>
+                <p class="feature-description">Recipes, cultural knowledge, origin stories, and regional variations preserved.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Heritage Section -->
+    <section class="heritage">
+        <div class="heritage-content">
+            <div class="heritage-text">
+                <h2>التراث الثقافي المغربي<br>Moroccan Cultural Heritage</h2>
+                <p>Moroccan cuisine is more than food—it's a living cultural heritage passed down through generations. Each dish tells a story of trade routes, regional traditions, and family rituals.</p>
+                <p>Miraj XR uses AI to preserve these intangible cultural assets, ensuring that traditional cooking techniques, ingredient knowledge, and cultural wisdom are not lost to time.</p>
+                <p>From the tajine pot's clay origins to the ceremonial preparation of couscous, we're safeguarding Morocco's culinary soul for future generations.</p>
+            </div>
+            <div class="heritage-stats">
+                <div class="stat-card">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Traditional Recipes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Cultural Stories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Cooking Techniques</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Heritage Preserved</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="technology">
+        <h2 class="section-title" style="color: var(--text-light);">Powered by Advanced AI</h2>
+        <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.7);">Built with Gemini 2.5 Flash Live for real-time multimodal interactions</p>
+        
+        <div class="tech-grid">
+            <div class="tech-card">
+                <h3><span class="material-icons">videocam</span> WebRTC Streaming</h3>
+                <p>Continuous video and audio streaming for real-time kitchen action recognition.</p>
+            </div>
+
+            <div class="tech-card">
+                <h3><span class="material-icons">psychology</span> Gemini Live API</h3>
+                <p>Multimodal AI that sees, hears, and responds in Darija with cultural awareness.</p>
+            </div>
+
+            <div class="tech-card">
+                <h3><span class="material-icons">functions</span> Function Calling</h3>
+                <p>Structured data retrieval for recipes, timers, and cultural context.</p>
+            </div>
+
+            <div class="tech-card">
+                <h3><span class="material-icons">visibility</span> Action Detection</h3>
+                <p>Computer vision identifies cutting, stirring, seasoning, and plating actions.</p>
+            </div>
+
+            <div class="tech-card">
+                <h3><span class="material-icons">record_voice_over</span> Speech Synthesis</h3>
+                <p>Natural Darija voice responses for hands-free cooking guidance.</p>
+            </div>
+
+            <div class="tech-card">
+                <h3><span class="material-icons">layers</span> XR Overlays</h3>
+                <p>Augmented reality-style visual guidance without specialized hardware.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Preserve Heritage?</h2>
+        <p>Experience the future of cultural preservation through AI-powered interactive cooking.</p>
+        <a href="mirajxr.html" class="cta-button" style="background: white; color: var(--accent-orange);">
+            <span class="material-icons" style="vertical-align: middle; margin-right: 10px;">restaurant</span>
+            Launch Miraj XR
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p><strong>Miraj XR</strong> - Preserving Moroccan Culinary Heritage Through Technology</p>
+        <p>Built with ❤️ for the HCI Hackathon | Powered by <a href="https://ai.google.dev/gemini-api/docs/live" target="_blank">Gemini 2.5 Flash Live</a></p>
+        <p>&copy; 2025 ITmatched | <a href="mailto:contact@itmatched.ma">contact@itmatched.ma</a></p>
+    </footer>
+</body>
+</html>
