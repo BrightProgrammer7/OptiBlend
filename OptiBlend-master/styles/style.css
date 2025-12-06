@@ -1,0 +1,312 @@
+/* OptiCem AI - Final Unified Styles */
+
+:root {
+    --primary: #16a34a;
+    --primary-light: #4ade80;
+    --secondary: #059669;
+    --accent: #0d9488;
+
+    --bg-main: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.7);
+    --border-glass: 1px solid rgba(255, 255, 255, 0.8);
+
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+
+    --radius: 24px;
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    background-image: radial-gradient(at top center, rgba(22, 163, 74, 0.05), transparent 60%);
+    background-attachment: fixed;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 700;
+    color: var(--text-main);
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    padding: 16px 32px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 50px;
+    border: 1px solid white;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+/* Fix for navbar jumping */
+.navbar:hover {
+    transform: translateX(-50%);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.4);
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 100px 0;
+}
+
+/* Hero */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Bento Grid */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.bento-card {
+    background: white;
+    padding: 40px;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s;
+    border: 1px solid #e2e8f0;
+}
+
+.bento-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.bento-card i {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.glass {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: var(--border-glass);
+}
+
+/* Grid Areas */
+.area-bio {
+    grid-column: span 2;
+}
+
+.area-services {
+    grid-column: span 1;
+}
+
+.area-advantages {
+    grid-column: span 3;
+}
+
+/* Dashboard Specifics */
+.dashboard-grid {
+    grid-template-columns: repeat(4, 1fr);
+    display: grid;
+    gap: 24px;
+    padding-top: 120px;
+}
+
+.kpi-card {
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+
+.kpi-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.chart-container {
+    grid-column: span 3;
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.actions-panel {
+    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Auth */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-box {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    width: 400px;
+    text-align: center;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* FAQ */
+.accordion-item {
+    background: white;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.accordion-header {
+    padding: 20px;
+    width: 100%;
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.accordion-content {
+    padding: 0 20px 20px;
+    display: none;
+    color: var(--text-muted);
+}
+
+.accordion-item.active .accordion-content {
+    display: block;
+}
+
+/* Footer */
+footer {
+    padding: 60px 0;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+
+    .bento-grid,
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .area-bio,
+    .area-services,
+    .area-advantages {
+        grid-column: span 1;
+    }
+
+    .chart-container {
+        grid-column: span 1;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    footer div {
+        text-align: center !important;
+    }
+}

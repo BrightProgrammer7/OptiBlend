@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord - OptiCem AI</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <script>
+        // Guard clause
+        if (!localStorage.getItem('user')) {
+            window.location.href = 'create-account.html';
+        }
+    </script>
+
+    <nav class="navbar glass">
+        <div class="logo">
+            <i class="fa-solid fa-industry" style="margin-right: 8px;"></i>OptiCem AI
+        </div>
+        <div class="nav-links">
+            <span id="welcomeMsg" style="color: var(--text-main); font-weight: 500;"></span>
+            <!-- ID Added for JS Listener -->
+            <button id="logoutBtn" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.8rem;">
+                <i class="fa-solid fa-right-from-bracket"></i> Déconnexion
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-grid">
+
+            <!-- Actions Panel -->
+            <div class="kpi-card glass actions-panel">
+                <h3 style="margin-bottom: 20px;">Panneau de Contrôle</h3>
+                <button id="refreshBtn" class="btn btn-primary" style="width: 100%;">
+                    <i class="fa-solid fa-rotate-right"></i> Lancer la Simulation
+                </button>
+                <button id="exportBtn" class="btn glass" style="width: 100%; background: white;">
+                    <i class="fa-solid fa-file-pdf"></i> Rapport Temps Réel
+                </button>
+                <hr style="border: 0; border-top: 1px solid #e2e8f0;">
+                <div style="text-align: left; padding: 0 10px;">
+                    <small
+                        style="color: var(--text-muted); display: block; margin-bottom: 5px; text-align: center;">État
+                        du Système</small>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <span
+                            style="width: 8px; height: 8px; background-color: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e;"></span>
+                        <span style="color: #22c55e; font-weight: 600; font-size: 0.9rem;">En Ligne</span>
+                    </div>
+                </div>
+                <div style="text-align: left; padding: 10px 10px 0 10px;">
+                    <small
+                        style="color: var(--text-muted); display: block; margin-bottom: 5px; text-align: center;">Module
+                        Vision</small>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <span
+                            style="width: 8px; height: 8px; background-color: #3b82f6; border-radius: 50%; box-shadow: 0 0 10px #3b82f6;"></span>
+                        <span style="color: #3b82f6; font-weight: 600; font-size: 0.9rem;">Actif</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="kpi-card glass">
+                <i class="fa-solid fa-bullseye"
+                    style="color: var(--primary); font-size: 1.8rem; margin-bottom: 15px; width: auto; height: auto; background: none; padding: 0;"></i>
+                <div class="kpi-value" id="pciTarget">4000</div>
+                <h4 style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">PCI Cible (kcal/kg)</h4>
+            </div>
+
+            <div class="kpi-card glass">
+                <i class="fa-solid fa-chart-line"
+                    style="color: var(--secondary); font-size: 1.8rem; margin-bottom: 15px; width: auto; height: auto; background: none; padding: 0;"></i>
+                <div class="kpi-value" id="pciPredicted">4020</div>
+                <h4 style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">Prédiction IA</h4>
+            </div>
+
+            <div class="kpi-card glass">
+                <div style="display: flex; justify-content: space-around; width: 100%; align-items: center;">
+                    <div style="text-align: center;">
+                        <i class="fa-solid fa-leaf"
+                            style="color: var(--accent); font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        <div class="kpi-value" id="tsrValue" style="font-size: 1.5rem;">65%</div>
+                        <small style="color: var(--text-muted);">Taux TSR</small>
+                    </div>
+                    <div style="height: 40px; width: 1px; background: #e2e8f0;"></div>
+                    <div style="text-align: center;">
+                        <i class="fa-solid fa-shield-halved"
+                            style="color: #f59e0b; font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        <div class="kpi-value" id="stabilityIdx" style="font-size: 1.5rem;">98%</div>
+                        <small style="color: var(--text-muted);">Stabilité</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vision Module Preview -->
+            <div class="glass"
+                style="background: white; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div
+                    style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0;">Analyse Visuelle Déchets</h3>
+                    <span
+                        style="background: #eff6ff; color: #3b82f6; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Caméra
+                        1</span>
+                </div>
+                <div
+                    style="width: 100%; height: 120px; background: #0f172a; border-radius: 10px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                    <i class="fa-solid fa-eye" style="color: rgba(255,255,255,0.2); font-size: 3rem;"></i>
+                    <div
+                        style="position: absolute; bottom: 10px; left: 10px; color: #22c55e; font-size: 0.8rem; font-family: monospace;">
+                        <i class="fa-solid fa-record-vinyl fa-beat"></i> LIVE
+                    </div>
+                    <div
+                        style="position: absolute; top: 10px; right: 10px; color: white; font-size: 0.8rem; background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 4px;">
+                        Teneur Plastique: 25%
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="glass chart-container" style="background: white;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="text-align: left; width: 100%;">Composition Optimisée du Flux</h3>
+                    <span
+                        style="background: #f1f5f9; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; color: var(--text-muted); white-space: nowrap;">Temps
+                        Réel</span>
+                </div>
+                <!-- Canvas is naturally centered by container styles if flex, but here it's block. -->
+                <canvas id="mixChart" style="width: 100%; height: 350px;"></canvas>
+            </div>
+
+            <script>
+                document.getElementById('welcomeMsg').textContent = 'Ingénieur : ' + (localStorage.getItem('user') || 'Invité');
+            </script>
+            <script src="js/main.js"></script>
+            <script src="js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Expert - OptiCem AI</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar glass">
+        <div class="logo">
+            <i class="fa-solid fa-industry" style="margin-right: 8px;"></i>OptiCem AI
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="create-account.html" class="btn btn-primary" style="padding: 10px 20px;">Espace Client</a>
+        </div>
+    </nav>
+
+    <section style="padding-top: 140px; padding-bottom: 80px;">
+        <div class="container">
+            <h1 style="margin-bottom: 20px;">FAQ Technique</h1>
+            <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 50px auto;">
+                Questions fréquentes concernant l'intégration d'OptiCem AI dans les systèmes de contrôle (DCS) des fours
+                rotatifs.
+            </p>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span style="display: flex; align-items: center; gap: 15px;">
+                            <i class="fa-solid fa-flask" style="color: var(--primary);"></i>
+                            Cela affecte-t-il la qualité du Clinker (C3S) ?
+                        </span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Non. OptiCem AI traite la teneur en C3S (Alite) comme une contrainte stricte. L'algorithme
+                            rejette tout mélange de combustible qui ferait chuter la température de flamme en dessous du
+                            seuil de frittage (1450°C), garantissant la stabilité des phases du clinker.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span style="display: flex; align-items: center; gap: 15px;">
+                            <i class="fa-solid fa-industry" style="color: var(--secondary);"></i>
+                            Quelle est la tolérance maximale au Chlore ?
+                        </span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Le système est configurable selon la capacité de votre bypass. Par défaut, il optimise pour
+                            un mélange avec < 1.0% de Chlore pour prévenir les accumulations de chlorure alcalin et la
+                                formation d'anneaux dans la gaine.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span style="display: flex; align-items: center; gap: 15px;">
+                            <i class="fa-solid fa-server" style="color: var(--accent);"></i>
+                            Comment les données sont-elles intégrées ?
+                        </span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>OptiCem se connecte directement à votre DCS (Système Numérique de Contrôle-Commande) via le
+                            protocole OPC UA. Il lit les données des capteurs NIR sur la ligne d'alimentation et écrit
+                            les consignes aux doseurs.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span style="display: flex; align-items: center; gap: 15px;">
+                            <i class="fa-solid fa-file-pdf" style="color: #64748b;"></i>
+                            Les rapports sont-ils conformes aux audits ?
+                        </span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Oui. Les rapports PDF générés fournissent une piste d'audit horodatée de chaque injection de
+                            lot de combustible, incluant les émissions calculées et l'apport calorifique, adaptés aux
+                            contrôles de conformité environnementale.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: 40px 0; border-top: 1px solid #e2e8f0; background: white; text-align: center;">
+        <div class="container">
+            <p style="color: var(--text-muted);">© 2025 OptiCem AI • Construct AI Hackathon</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

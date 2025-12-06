@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptiBlend - Intelligence Artificielle pour Cimenteries</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar glass">
+        <div class="logo">
+            <i class="fa-solid fa-layer-group" style="margin-right: 10px;"></i>OptiBlend
+        </div>
+        <a href="#vision">Notre Vision</a>  
+        <a href="#services">Nos Services</a>
+        <a href="#equipe">L'Équipe</a>
+        <a href="#faq">FAQ</a>
+        <a href="#account" class="btn btn-primary" style="padding: 10px 20px;">Espace Client</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section with User's Verbatim Text -->
+    <section class="hero" id="vision">
+        <div class="container">
+            <div
+                style="background: rgba(255,255,255,0.95); padding: 50px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); max-width: 1000px; margin: 0 auto;">
+
+                <h1
+                    style="font-size: 3rem; margin-bottom: 30px; line-height: 1.1; color: var(--text-main); font-weight: 700;">
+                    Recover more resources with <br>
+                    <span
+                        style="font-size: 4rem; font-weight: 900; color: var(--primary); display: inline-block; margin-top: 10px; letter-spacing: -1px; text-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                        w<span style="color: var(--secondary); font-size: 1.1em;">A</span>ste <span
+                            style="color: var(--secondary); font-size: 1.1em;">I</span>ntelligence
+                    </span>
+                </h1>
+
+                <p style="font-size: 1.25rem; color: var(--text-muted); margin-bottom: 30px;">
+                    OptiBlend orchestre la synergie entre cimentiers et fournisseurs pour garantir un mix énergétique
+                    optimal
+                    et sécuriser la performance du four en temps réel.
+                </p>
+
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
+                    <div
+                        style="background: #f1f5f9; padding: 15px 25px; border-radius: 50px; font-weight: 600; color: var(--primary);">
+                        <i class="fa-solid fa-arrow-trend-down" style="margin-right: 8px;"></i>Réduire l’instabilité du
+                        four
+                    </div>
+                    <div
+                        style="background: #f1f5f9; padding: 15px 25px; border-radius: 50px; font-weight: 600; color: var(--secondary);">
+                        <i class="fa-solid fa-bullseye" style="margin-right: 8px;"></i>Maintenir la PCI cible
+                    </div>
+                    <div
+                        style="background: #f1f5f9; padding: 15px 25px; border-radius: 50px; font-weight: 600; color: var(--accent);">
+                        <i class="fa-solid fa-leaf" style="margin-right: 8px;"></i>Minimiser la dépendance aux énergies
+                        fossiles
+                    </div>
+                </div>
+
+                <p
+                    style="font-size: 1.15rem; color: var(--text-main); font-weight: 500; border-left: 5px solid var(--primary); padding-left: 20px; text-align: left; margin: 0 auto;">
+                    Grâce à notre modèle IA, les cimenteries peuvent anticiper les risques, ajuster leurs choix de
+                    déchets en temps réel et sécuriser leur production tout en améliorant leur performance
+                    environnementale.
+                </p>
+
+                <div style="margin-top: 50px;">
+                    <a href="#services" class="btn btn-primary">Découvrir nos Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works (Workflow) Section - ID linked to Navbar -->
+    <section id="services" style="background: white; padding: 80px 0;">
+        <div class="container">
+            <h2 style="margin-bottom: 50px;">Comment ça marche ?</h2>
+            <div
+                style="display: flex; justify-content: space-around; flex-wrap: wrap; text-align: center; gap: 40px; position: relative;">
+
+                <!-- Connector Line (Visual only for desktop) -->
+                <div
+                    style="position: absolute; top: 40px; left: 15%; right: 15%; height: 2px; background: #e2e8f0; z-index: 0; display: none;">
+                </div>
+
+                <!-- Step 1 -->
+                <div style="flex: 1; min-width: 250px; position: relative; z-index: 1;">
+                    <div
+                        style="width: 80px; height: 80px; background: #eff6ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--primary); font-size: 2rem; box-shadow: 0 0 0 10px white;">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">1. Capture & Analyse</h3>
+                    <p style="color: var(--text-muted);">
+                        Le module <strong>Computer Vision</strong> scanne les déchets en temps réel pour identifier leur
+                        composition (plastique, biomasse, humidité).
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div style="flex: 1; min-width: 250px; position: relative; z-index: 1;">
+                    <div
+                        style="width: 80px; height: 80px; background: #f0fdf4; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--secondary); font-size: 2rem; box-shadow: 0 0 0 10px white;">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">2. Prédiction IA</h3>
+                    <p style="color: var(--text-muted);">
+                        Notre moteur prédictif calcule le PCI exact et simule l'impact thermique dans le four rotatif.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div style="flex: 1; min-width: 250px; position: relative; z-index: 1;">
+                    <div
+                        style="width: 80px; height: 80px; background: #fff7ed; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--accent); font-size: 2rem; box-shadow: 0 0 0 10px white;">
+                        <i class="fa-solid fa-industry"></i>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">3. Optimisation</h3>
+                    <p style="color: var(--text-muted);">
+                        La plateforme recommande le mix optimal pour garantir la stabilité du four et maximiser le TSR.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Modules Section -->
+    <section id="modules" style="background: #f8fafc; padding: 80px 0;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <span
+                    style="background: #e2e8f0; color: #475569; padding: 5px 15px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                    Technologie
+                </span>
+                <h2 style="margin-top: 20px;">Une Suite Complète pour Cimentiers</h2>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Module 1: Vision -->
+                <div class="bento-card glass" style="background: white; grid-column: span 12;">
+                    <div style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <i class="fa-solid fa-camera-retro"
+                                style="color: var(--primary); font-size: 2.5rem; margin-bottom: 20px;"></i>
+                            <h3>Module Vision 360°</h3>
+                            <p style="color: var(--text-muted); margin-top: 15px; font-size: 1.1rem;">
+                                Ne devinez plus la qualité de vos déchets. Nos caméras intelligentes installées sur les
+                                convoyeurs analysent la texture et la couleur des flux pour détecter les anomalies avant
+                                qu'elles n'atteignent le brûleur.
+                            </p>
+                            <ul style="margin-top: 20px; color: var(--text-muted); list-style: none; padding: 0;">
+                                <li style="margin-bottom: 10px;"><i class="fa-solid fa-check"
+                                        style="color: var(--primary); margin-right: 10px;"></i>Détection taux d'humidité
+                                </li>
+                                <li style="margin-bottom: 10px;"><i class="fa-solid fa-check"
+                                        style="color: var(--primary); margin-right: 10px;"></i>Classification des
+                                    matériaux</li>
+                            </ul>
+                        </div>
+                        <div
+                            style="flex: 1; min-width: 300px; background: #1e293b; border-radius: 15px; padding: 20px; color: white;">
+                            <!-- Fake Code/Data Visualization -->
+                            <div style="font-family: monospace; font-size: 0.9rem;">
+                                <div style="color: #94a3b8;">> Initializing Vision Stream...</div>
+                                <div style="color: #22c55e;">> Stream Active [CAM_01]</div>
+                                <div style="margin-top: 10px; border-left: 2px solid #3b82f6; padding-left: 10px;">
+                                    <div>Object_ID: <span style="color: #facc15;">#TR_402</span></div>
+                                    <div>Class: <span style="color: #facc15;">PLASTIC_HDPE</span></div>
+                                    <div>Confidence: <span style="color: #facc15;">98.4%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 2: Prediction -->
+                <div class="bento-card glass area-services" style="background: white;">
+                    <i class="fa-solid fa-chart-area" style="color: var(--secondary);"></i>
+                    <h3>Prédiction PCI</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        Anticipez les variations calorifiques 15 minutes avant l'injection.
+                    </p>
+                </div>
+
+                <!-- Module 3: Reporting -->
+                <div class="bento-card glass area-advantages" style="background: white;">
+                    <i class="fa-solid fa-file-contract" style="color: var(--accent);"></i>
+                    <h3>Reporting & Audit</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        Génération automatique de rapports de conformité environnementale (CO2, Chlore).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badge Section -->
+    <section style="padding: 40px 0; background: white; border-top: 1px solid #f1f5f9;">
+        <div class="container" style="text-align: center;">
+            <p style="color: var(--text-muted); font-weight: 500; margin-bottom: 20px;">CO-CONSTRUIT AVEC L'EXPERTISE DE
+            </p>
+            <div
+                style="font-size: 2rem; font-weight: 800; color: #cbd5e1; letter-spacing: 5px; text-transform: uppercase;">
+                <i class="fa-solid fa-helmet-safety" style="margin-right: 15px;"></i>HOLCIM
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="equipe" style="background: white; padding: 80px 0;">
+        <div class="container">
+            <h2 style="margin-bottom: 50px;">Notre Équipe</h2>
+            <div style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div
+                        style="width: 120px; height: 120px; background: #e2e8f0; border-radius: 50%; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-user-astronaut" style="font-size: 2.5rem; color: #64748b;"></i>
+                    </div>
+                    <h4>Ingénierie IA</h4>
+                    <p style="color: var(--text-muted);">Développement Modèle</p>
+                </div>
+                <div style="text-align: center;">
+                    <div
+                        style="width: 120px; height: 120px; background: #e2e8f0; border-radius: 50%; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-flask-vial" style="font-size: 2.5rem; color: #64748b;"></i>
+                    </div>
+                    <h4>Chimie Industrielle</h4>
+                    <p style="color: var(--text-muted);">Analyse Procédés</p>
+                </div>
+                <div style="text-align: center;">
+                    <div
+                        style="width: 120px; height: 120px; background: #e2e8f0; border-radius: 50%; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-code" style="font-size: 2.5rem; color: #64748b;"></i>
+                    </div>
+                    <h4>Développement</h4>
+                    <p style="color: var(--text-muted);">Architecture Web</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" style="background: #f8fafc; padding: 80px 0;">
+        <div class="container">
+            <h2 style="margin-bottom: 50px;">Questions Fréquentes (Q&A)</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+
+                <div class="accordion-item"
+                    style="background: white; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <button class="accordion-header"
+                        style="background: white; padding: 20px; width: 100%; text-align: left; border: none; border-radius: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <span
+                            style="display: flex; align-items: center; gap: 15px; font-weight: 600; font-size: 1.1rem; color: var(--text-main);">
+                            <i class="fa-solid fa-flask" style="color: var(--primary);"></i>
+                            Cela affecte-t-il la qualité du Clinker (C3S) ?
+                        </span>
+                        <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+                    </button>
+                    <div class="accordion-content"
+                        style="padding: 0 20px 20px 20px; color: var(--text-muted); line-height: 1.6;">
+                        <p>Non. OptiBlend AI traite la teneur en C3S (Alite) comme une contrainte stricte. L'algorithme
+                            rejette tout mélange de combustible qui ferait chuter la température de flamme en dessous du
+                            seuil de frittage (1450°C).</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item"
+                    style="background: white; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <button class="accordion-header"
+                        style="background: white; padding: 20px; width: 100%; text-align: left; border: none; border-radius: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <span
+                            style="display: flex; align-items: center; gap: 15px; font-weight: 600; font-size: 1.1rem; color: var(--text-main);">
+                            <i class="fa-solid fa-industry" style="color: var(--secondary);"></i>
+                            Quelle est la tolérance maximale au Chlore ?
+                        </span>
+                        <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+                    </button>
+                    <div class="accordion-content"
+                        style="padding: 0 20px 20px 20px; color: var(--text-muted); line-height: 1.6;">
+                        <p>Le système est configurable selon la capacité de votre bypass. Par défaut, il optimise pour
+                            un mélange avec < 1.0% de Chlore pour prévenir les accumulations de chlorure alcalin.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item"
+                    style="background: white; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <button class="accordion-header"
+                        style="background: white; padding: 20px; width: 100%; text-align: left; border: none; border-radius: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <span
+                            style="display: flex; align-items: center; gap: 15px; font-weight: 600; font-size: 1.1rem; color: var(--text-main);">
+                            <i class="fa-solid fa-server" style="color: var(--accent);"></i>
+                            Comment les données sont-elles intégrées ?
+                        </span>
+                        <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+                    </button>
+                    <div class="accordion-content"
+                        style="padding: 0 20px 20px 20px; color: var(--text-muted); line-height: 1.6;">
+                        <p>OptiBlend se connecte directement à votre DCS via le protocole OPC UA. Il lit les données des
+                            capteurs NIR et écrit les consignes aux doseurs de manière sécurisée.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Account Section -->
+    <section id="account"
+        style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; padding: 80px 0; text-align: center;">
+        <div class="container">
+            <h2 style="color: white; margin-bottom: 20px; font-size: 2.5rem;">Prêt à optimiser votre production ?</h2>
+            <p style="color: #94a3b8; font-size: 1.25rem; max-width: 700px; margin: 0 auto 40px auto;">
+                Rejoignez les cimenteries qui utilisent OptiBlend pour sécuriser leur mix énergétique et réduire leur
+                empreinte carbone.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <a href="create-account.html" class="btn btn-primary"
+                    style="padding: 15px 35px; font-size: 1.1rem;">Créer un Compte Usine</a>
+                <a href="dash.html" class="btn"
+                    style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 15px 35px; font-size: 1.1rem; border-radius: 50px;">Accéder
+                    à la Démo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #1e293b; color: white;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div style="text-align: left;">
+                    <h3 style="color: white; text-align: left; margin-bottom: 15px;">OptiBlend</h3>
+                    <p style="color: #94a3b8; text-align: left;">
+                        La solution d'avenir pour l'industrie cimentière.
+                    </p>
+                </div>
+                <div style="text-align: right;">
+                    <h4 style="color: white; text-align: right; margin-bottom: 15px;">Contact</h4>
+                    <p style="color: #94a3b8; text-align: right;">contact@OptiBlend.ai</p>
+                    <p style="color: #94a3b8; text-align: right;">Paris, France</p>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #334155; padding-top: 20px; text-align: center; color: #64748b;">
+                © 2025 OptiBlend Project.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

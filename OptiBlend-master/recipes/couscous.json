@@ -1,0 +1,245 @@
+{
+  "id": "couscous",
+  "name": {
+    "darija": "الكسكس",
+    "arabic": "كسكس",
+    "french": "Couscous",
+    "english": "Couscous"
+  },
+  "description": {
+    "darija": "الكسكس هو الطبق الوطني للمغرب. كيتحضر بالخضر واللحم والحمص.",
+    "english": "Couscous is the national dish of Morocco. It is prepared with vegetables, meat, and chickpeas."
+  },
+  "cultural_context": {
+    "darija": "الكسكس كيتقدم تقليديا يوم الجمعة. هو رمز من رموز الضيافة المغربية.",
+    "english": "Couscous is traditionally served on Fridays. It is a symbol of Moroccan hospitality."
+  },
+  "ingredients": [
+    {
+      "name": {
+        "darija": "الكسكس",
+        "arabic": "كسكس",
+        "french": "semoule de couscous",
+        "english": "couscous semolina"
+      },
+      "quantity": "500 غرام",
+      "cultural_note": {
+        "darija": "الكسكس المغربي كيكون ناعم ولذيذ.",
+        "english": "Moroccan couscous is fine and delicious."
+      }
+    },
+    {
+      "name": {
+        "darija": "اللحم (غنمي أو بقري)",
+        "arabic": "لحم",
+        "french": "viande (mouton ou bœuf)",
+        "english": "meat (lamb or beef)"
+      },
+      "quantity": "500 غرام",
+      "cultural_note": {
+        "darija": "اللحم الغنمي هو الأحسن للكسكس.",
+        "english": "Lamb is best for couscous."
+      }
+    },
+    {
+      "name": {
+        "darija": "الحمص",
+        "arabic": "حمص",
+        "french": "pois chiches",
+        "english": "chickpeas"
+      },
+      "quantity": "كاس",
+      "cultural_note": {
+        "darija": "الحمص كيتنقع من الليل.",
+        "english": "Chickpeas are soaked overnight."
+      }
+    },
+    {
+      "name": {
+        "darija": "الخضر (جزر، لفت، كوسة، قرع)",
+        "arabic": "خضروات",
+        "french": "légumes (carottes, navets, courgettes, potiron)",
+        "english": "vegetables (carrots, turnips, zucchini, pumpkin)"
+      },
+      "quantity": "حسب الرغبة",
+      "cultural_note": {
+        "darija": "الخضر كتعطي اللون والنكهة للكسكس.",
+        "english": "Vegetables give color and flavor to couscous."
+      }
+    },
+    {
+      "name": {
+        "darija": "البصل",
+        "arabic": "بصل",
+        "french": "oignon",
+        "english": "onion"
+      },
+      "quantity": "2 حبات",
+      "cultural_note": {
+        "darija": "البصل كيعطي الحلاوة للمرق.",
+        "english": "Onions give sweetness to the broth."
+      }
+    },
+    {
+      "name": {
+        "darija": "الطماطم",
+        "arabic": "طماطم",
+        "french": "tomates",
+        "english": "tomatoes"
+      },
+      "quantity": "3 حبات",
+      "cultural_note": {
+        "darija": "الطماطم كتعطي اللون الأحمر للمرق.",
+        "english": "Tomatoes give the red color to the broth."
+      }
+    },
+    {
+      "name": {
+        "darija": "التوابل (رأس الحانوت، كركم، زنجبيل)",
+        "arabic": "توابل",
+        "french": "épices (ras el hanout, curcuma, gingembre)",
+        "english": "spices (ras el hanout, turmeric, ginger)"
+      },
+      "quantity": "حسب الذوق",
+      "cultural_note": {
+        "darija": "رأس الحانوت هو خليط التوابل المغربية التقليدية.",
+        "english": "Ras el hanout is the traditional Moroccan spice blend."
+      }
+    },
+    {
+      "name": {
+        "darija": "زيت العود",
+        "arabic": "زيت الزيتون",
+        "french": "huile d'olive",
+        "english": "olive oil"
+      },
+      "quantity": "4 ملاعق كبيرة",
+      "cultural_note": {
+        "darija": "زيت العود كيعطي النكهة المغربية.",
+        "english": "Olive oil gives the Moroccan flavor."
+      }
+    },
+    {
+      "name": {
+        "darija": "الزبدة",
+        "arabic": "زبدة",
+        "french": "beurre",
+        "english": "butter"
+      },
+      "quantity": "50 غرام",
+      "cultural_note": {
+        "darija": "الزبدة كتخلي الكسكس هش.",
+        "english": "Butter makes the couscous fluffy."
+      }
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 0,
+      "action": "preparation",
+      "darija_instruction": "نقع الحمص من الليل. قطع اللحم لقطع متوسطة. قطع الخضر لقطع كبيرة.",
+      "english_instruction": "Soak chickpeas overnight. Cut meat into medium pieces. Cut vegetables into large pieces.",
+      "duration_seconds": 900,
+      "timer_label": "تحضير المكونات",
+      "expected_actions": ["cutting", "chopping"],
+      "tips": {
+        "darija": "الخضر الكبيرة ما كتفككش فالطيب.",
+        "english": "Large vegetables don't fall apart during cooking."
+      }
+    },
+    {
+      "step_number": 1,
+      "action": "cooking_meat",
+      "darija_instruction": "حط زيت العود فالقدرة السفلية ديال الكسكاس. زيد اللحم والبصل والتوابل. قليهم مزيان.",
+      "english_instruction": "Put olive oil in the bottom pot of the couscoussier. Add meat, onions, and spices. Sauté well.",
+      "duration_seconds": 600,
+      "timer_label": "قلي اللحم",
+      "expected_actions": ["stirring", "frying"],
+      "tips": {
+        "darija": "قلي اللحم كيعطي نكهة قوية.",
+        "english": "Sautéing meat gives strong flavor."
+      }
+    },
+    {
+      "step_number": 2,
+      "action": "simmering_broth",
+      "darija_instruction": "زيد الماء والحمص والطماطم. خلي المرق يطيب على نار متوسطة لمدة 30 دقيقة.",
+      "english_instruction": "Add water, chickpeas, and tomatoes. Let the broth simmer on medium heat for 30 minutes.",
+      "duration_seconds": 1800,
+      "timer_label": "طيب المرق",
+      "expected_actions": ["idle"],
+      "tips": {
+        "darija": "المرق كيكون غني بالنكهة.",
+        "english": "The broth becomes rich in flavor."
+      }
+    },
+    {
+      "step_number": 3,
+      "action": "steaming_couscous",
+      "darija_instruction": "حط الكسكس فالقدرة الفوقانية. بخره فوق المرق لمدة 20 دقيقة.",
+      "english_instruction": "Put couscous in the top pot. Steam it over the broth for 20 minutes.",
+      "duration_seconds": 1200,
+      "timer_label": "تبخير الكسكس",
+      "expected_actions": ["idle"],
+      "tips": {
+        "darija": "التبخير كيخلي الكسكس هش.",
+        "english": "Steaming makes the couscous fluffy."
+      }
+    },
+    {
+      "step_number": 4,
+      "action": "fluffing_couscous",
+      "darija_instruction": "خرج الكسكس وحطو فصحن كبير. زيد الزبدة وشوية ماء. فككو بيديك.",
+      "english_instruction": "Remove couscous and put it in a large dish. Add butter and some water. Fluff it with your hands.",
+      "duration_seconds": 300,
+      "timer_label": "تفكيك الكسكس",
+      "expected_actions": ["mixing", "kneading"],
+      "tips": {
+        "darija": "التفكيك كيخلي الكسكس ما يتكتلش.",
+        "english": "Fluffing prevents the couscous from clumping."
+      }
+    },
+    {
+      "step_number": 5,
+      "action": "second_steaming",
+      "darija_instruction": "رجع الكسكس للقدرة الفوقانية. بخره مرة أخرى لمدة 20 دقيقة.",
+      "english_instruction": "Return couscous to the top pot. Steam it again for 20 minutes.",
+      "duration_seconds": 1200,
+      "timer_label": "التبخير الثاني",
+      "expected_actions": ["idle"],
+      "tips": {
+        "darija": "التبخير الثاني كيخلي الكسكس خفيف.",
+        "english": "Second steaming makes the couscous light."
+      }
+    },
+    {
+      "step_number": 6,
+      "action": "adding_vegetables",
+      "darija_instruction": "زيد الخضر للمرق. خليها تطيب لمدة 20 دقيقة.",
+      "english_instruction": "Add vegetables to the broth. Let them cook for 20 minutes.",
+      "duration_seconds": 1200,
+      "timer_label": "طيب الخضر",
+      "expected_actions": ["idle"],
+      "tips": {
+        "darija": "الخضر كتطيب بسرعة.",
+        "english": "Vegetables cook quickly."
+      }
+    },
+    {
+      "step_number": 7,
+      "action": "plating",
+      "darija_instruction": "قدم الكسكس فصحن كبير. حط اللحم والخضر فوقو. صب المرق فصحن جانبي.",
+      "english_instruction": "Serve couscous in a large dish. Put meat and vegetables on top. Pour broth in a side dish.",
+      "duration_seconds": 0,
+      "timer_label": "",
+      "expected_actions": ["plating"],
+      "tips": {
+        "darija": "الكسكس كيتقدم تقليديا فصحن واحد كبير.",
+        "english": "Couscous is traditionally served in one large dish."
+      }
+    }
+  ],
+  "total_time_minutes": 120,
+  "difficulty": "medium",
+  "servings": 6
+}

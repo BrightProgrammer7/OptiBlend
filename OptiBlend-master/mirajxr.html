@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holcim AI-Recipe | Industrial Waste Optimization</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Oswald:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        :root {
+            --holcim-green: #5C8C22;
+            --holcim-gray: #4A4A4A;
+            --industrial-bg: #1e1e24;
+            --panel-bg: #2b2b36;
+            --text-light: #e0e0e0;
+            --accent-blue: #00A3E0;
+            --warning: #FFC107;
+            --danger: #F44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--industrial-bg);
+            color: var(--text-light);
+            overflow: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Left Side: Vision Feed */
+        .vision-section {
+            flex: 1;
+            position: relative;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 2px solid #333;
+        }
+
+        #videoElement {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .overlay-data {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 4px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .overlay-data h3 {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
+        .overlay-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Right Side: SCADA Panel */
+        .scada-panel {
+            width: 500px;
+            background: var(--panel-bg);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid #444;
+        }
+
+        .header {
+            background: #15151a;
+            padding: 20px;
+            border-bottom: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 24px;
+            color: var(--holcim-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-badge {
+            background: var(--holcim-green);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .scroll-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .panel-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title .material-icons {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        /* Fuel Mix Table */
+        .fuel-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .fuel-table th {
+            text-align: left;
+            font-size: 12px;
+            color: #888;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+        .fuel-table td {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+        }
+
+        .fuel-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .fuel-amount {
+            font-family: monospace;
+            color: var(--warning);
+            font-weight: 700;
+            text-align: right;
+        }
+
+        /* KPI Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .kpi-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .kpi-label {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
+        .kpi-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        /* Chat Log */
+        .log-container {
+            height: 200px;
+            overflow-y: auto;
+            border-top: 1px solid #444;
+            background: #111;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .log-entry {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .log-entry.assistant {
+            color: var(--accent-blue);
+        }
+
+        .log-entry.system {
+            color: var(--holcim-green);
+        }
+
+        .log-entry.scada {
+            color: var(--warning);
+        }
+
+        /* Start Button overlay */
+        .start-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: var(--holcim-green);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #4a751a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-container">
+        <!-- Vision Feed -->
+        <div class="vision-section">
+            <video id="videoElement" autoplay playsinline muted></video>
+
+            <div class="overlay-data">
+                <h3>CONVEYOR STATUS</h3>
+                <div class="overlay-value">LIVE MONITORING</div>
+            </div>
+
+            <div class="start-overlay" id="startOverlay">
+                <h1 style="color:white; margin-bottom: 20px;">HOLCIM AI-RECIPE</h1>
+                <button class="btn-primary" id="startButton">Initialize System</button>
+            </div>
+        </div>
+
+        <!-- SCADA Panel -->
+        <div class="scada-panel">
+            <div class="header">
+                <h1>AI-Recipe Control</h1>
+                <span class="status-badge">SYSTEM ACTIVE</span>
+            </div>
+
+            <div class="scroll-content">
+
+                <!-- Optimization Results -->
+                <div class="panel-section">
+                    <div class="section-title">
+                        <span class="material-icons">settings_input_component</span>
+                        Optimized Fuel Mix (Tons/Hour)
+                    </div>
+                    <table class="fuel-table" id="mixTable">
+                        <thead>
+                            <tr>
+                                <th>WASTE STREAM</th>
+                                <th style="text-align: right;">FEED RATE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mixTableBody">
+                            <tr>
+                                <td colspan="2" style="text-align: center; color: #666;">Waiting for optimization...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Parameters -->
+                <div class="panel-section">
+                    <div class="section-title">
+                        <span class="material-icons">speed</span>
+                        Kiln Operational Parameters
+                    </div>
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-label">TARGET PCI</div>
+                            <div class="kpi-value" id="targetPciVal">4500</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">PROJECTED MIX PCI</div>
+                            <div class="kpi-value" id="projectedPciVal" style="color: var(--accent-blue);">--</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">SULFUR LEVEL</div>
+                            <div class="kpi-value" id="sulfurVal">--%</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">CHLORIDE LEVEL</div>
+                            <div class="kpi-value" id="chlorideVal">--%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manual Override -->
+                <div class="panel-section">
+                    <div class="section-title">
+                        <span class="material-icons">mic</span>
+                        Voice Commands
+                    </div>
+                    <p style="font-size: 13px; color: #aaa;">
+                        System listens for commands via Gemini Live.<br>
+                        Try: <em>"Optimize the mix now"</em> or <em>"Set target PCI to 5000"</em>.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Logs -->
+            <div class="log-container" id="chatLog">
+                <div class="log-entry system">[SYSTEM] Ready for initialization...</div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="canvasElement" style="display: none;"></canvas>
+    <script src="mirajxr.js"></script>
+</body>
+
+</html>

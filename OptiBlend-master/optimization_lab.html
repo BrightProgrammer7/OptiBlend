@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOLCIM NEXUS | OPTIMIZATION CORE</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Rajdhani:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-deep: #050507;
+            --bg-panel: rgba(20, 20, 25, 0.7);
+            --neon-green: #5C8C22;
+            --neon-blue: #00A3E0;
+            --alert-red: #FF3333;
+            --text-main: #E0E0E0;
+            --text-dim: #888;
+            --border-glow: 0 0 10px rgba(92, 140, 34, 0.3);
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: radial-gradient(circle at center, #1a1a20 0%, var(--bg-deep) 100%);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
+            background-size: cover;
+        }
+
+        /* Scanline Effect */
+        body::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--neon-green);
+            text-shadow: 0 0 15px var(--neon-green);
+            border-bottom: 2px solid var(--neon-green);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+            height: calc(100vh - 100px);
+            position: relative;
+            z-index: 3;
+        }
+
+        .panel {
+            background: var(--bg-panel);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+            overflow-y: auto;
+        }
+
+        .panel:hover {
+            border-color: var(--neon-green);
+            box-shadow: var(--border-glow);
+        }
+
+        h2 {
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--neon-blue);
+            font-size: 20px;
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-left: 3px solid var(--neon-blue);
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
+            color: var(--neon-blue);
+            padding: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 15px;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 163, 224, 0.3);
+        }
+
+        button {
+            background: transparent;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 15px;
+            width: 100%;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+
+        .item-row {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #444;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .metric-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border: 1px solid #333;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .status-Optimal {
+            background: rgba(92, 140, 34, 0.2);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+        }
+
+        .status-Infeasible {
+            background: rgba(255, 51, 51, 0.2);
+            color: var(--alert-red);
+            border: 1px solid var(--alert-red);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-green);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>
+        <span class="material-icons" style="font-size: 36px; margin-right: 15px;">hub</span>
+        HOLCIM NEXUS <span
+            style="font-size: 14px; margin-left: 10px; opacity: 0.6; color:white; font-family: 'JetBrains Mono';">v2.5.0
+            // OPTIMIZATION CORE</span>
+    </h1>
+
+    <div class="container">
+
+        <!-- Sidebar: Configuration -->
+        <div class="panel">
+            <h2>// SYSTEM PARAMETERS</h2>
+
+            <div style="margin-bottom: 30px;">
+                <label>Protocol</label>
+                <div
+                    style="color: var(--neon-green); font-size: 14px; border: 1px solid var(--neon-green); padding: 5px; text-align: center;">
+                    50/50 HYBRID MODE ACTIVE
+                </div>
+            </div>
+
+            <label>Min PCI (kcal/kg)</label>
+            <input type="number" id="min_pci" value="3000">
+
+            <label>Max Chlorine (%)</label>
+            <input type="number" id="max_cl" value="0.03" step="0.01">
+
+            <label>Max Humidity (%)</label>
+            <input type="number" id="max_h" value="0.25" step="0.01">
+
+            <h2 style="margin-top: 30px;">// WASTE STREAMS</h2>
+            <div id="waste-list">
+                <!-- Dynamic Items -->
+            </div>
+            <button onclick="addWasteStream()" style="border-color: #666; color: #aaa; font-size: 12px;">+ Add Stream
+                Node</button>
+
+            <button onclick="solveOptimization()" style="margin-top: 30px;">
+                <span class="material-icons" style="vertical-align: middle; font-size: 18px;">bolt</span>
+                INITIATE SOLVER
+            </button>
+        </div>
+
+        <!-- Main Content: Results -->
+        <div class="panel">
+            <h2>// SIMULATION OUTPUT</h2>
+
+            <div id="results-area" style="display:none;">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 20px;">
+                    <div>
+                        <div style="font-size: 12px; color: #888;">STATUS</div>
+                        <span id="status-badge" class="status-badge">--</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 12px; color: #888;">OBJECTIVE (Z)</div>
+                        <span id="obj-val"
+                            style="color: var(--neon-green); font-size: 32px; font-weight: bold; text-shadow: 0 0 10px rgba(92,140,34,0.5);">--</span>
+                        <span style="font-size:14px;">kcal</span>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <!-- Mix Chart -->
+                    <div>
+                        <h3 style="font-size: 14px; color: #aaa; margin-bottom: 15px;">FUEL MIX STRATEGY</h3>
+                        <div style="position: relative; height: 250px;">
+                            <canvas id="mixChart"></canvas>
+                        </div>
+                        <div id="mix-details" style="margin-top: 20px; font-size: 13px;"></div>
+                    </div>
+
+                    <!-- Metrics -->
+                    <div>
+                        <h3 style="font-size: 14px; color: #aaa; margin-bottom: 15px;">EMISSION PREDICTIONS</h3>
+
+                        <div class="metric-box">
+                            <span>TOTAL CHLORINE</span>
+                            <span id="res-cl" style="color: var(--neon-blue); font-weight: bold;">--</span>
+                        </div>
+                        <div class="metric-box">
+                            <span>TOTAL SULFUR</span>
+                            <span id="res-s" style="color: var(--neon-blue); font-weight: bold;">--</span>
+                        </div>
+                        <div class="metric-box">
+                            <span>TOTAL HUMIDITY</span>
+                            <span id="res-h" style="color: var(--neon-blue); font-weight: bold;">--</span>
+                        </div>
+
+                        <div
+                            style="margin-top: 30px; padding: 15px; border: 1px dashed #444; font-size: 12px; color: #666;">
+                            // NOTE: Base Load (Petcoke) is fixed at 50%. Optimization applies only to the Alternative
+                            Fuel fraction.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading" style="display:none; text-align: center; padding: 100px; color: var(--neon-green);">
+                <span class="material-icons"
+                    style="font-size: 48px; animation: spin 1s infinite linear;">settings</span>
+                <br><br>
+                PROCESSING MATRIX...
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <script>
+        // Initial Data
+        let wasteStreams = [
+            { name: "Tires", pci: 8000, chlorine: 0.01, sulfur: 1.5, humidity: 0.02, stock: 100 },
+            { name: "Wood", pci: 4000, chlorine: 0.02, sulfur: 0.1, humidity: 0.20, stock: 50 },
+            { name: "Sludge", pci: 1000, chlorine: 0.05, sulfur: 0.2, humidity: 0.60, stock: 200 }
+        ];
+
+        function renderWasteList() {
+            const container = document.getElementById('waste-list');
+            container.innerHTML = '';
+            wasteStreams.forEach((w, index) => {
+                const div = document.createElement('div');
+                div.className = 'item-row';
+                div.innerHTML = `
+                    <div style="font-weight:bold; color:var(--text-main); margin-bottom:5px; font-size:14px; letter-spacing:1px;">${w.name}</div>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                        <input type="number" placeholder="PCI" value="${w.pci}" onchange="updateStream(${index}, 'pci', this.value)" style="margin-bottom:0;">
+                        <input type="number" placeholder="Cl" value="${w.chlorine}" onchange="updateStream(${index}, 'chlorine', this.value)" style="margin-bottom:0;">
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateStream(index, field, value) {
+            wasteStreams[index][field] = parseFloat(value);
+        }
+
+        function addWasteStream() {
+            wasteStreams.push({ name: "New Stream", pci: 3000, chlorine: 0.01, sulfur: 0.1, humidity: 0.1, stock: 100 });
+            renderWasteList();
+        }
+
+        async function solveOptimization() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results-area').style.display = 'none';
+
+            const payload = {
+                waste_data: wasteStreams,
+                constraints: {
+                    min_pci: parseFloat(document.getElementById('min_pci').value),
+                    max_chlorine: parseFloat(document.getElementById('max_cl').value),
+                    max_humidity: parseFloat(document.getElementById('max_h').value)
+                }
+            };
+
+            try {
+                const response = await fetch('http://localhost:8082/solve', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                // Artificial delay for "Computation Effect"
+                setTimeout(() => renderResults(result), 800);
+            } catch (err) {
+                alert("CONNECTION ERROR: Lab Server Offline.");
+                console.error(err);
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        let chartInstance = null;
+        function renderResults(data) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('results-area').style.display = 'block';
+
+            // Metrics
+            document.getElementById('status-badge').textContent = data.status;
+            document.getElementById('status-badge').className = `status-badge status-${data.status}`;
+            document.getElementById('obj-val').textContent = data.objective_value;
+
+            document.getElementById('res-cl').textContent = (data.details.final_chlorine * 100).toFixed(3) + "%";
+            document.getElementById('res-h').textContent = (data.details.final_humidity * 100).toFixed(3) + "%";
+            document.getElementById('res-s').textContent = (data.details.final_sulfur * 100).toFixed(3) + "%";
+
+            // Mix Details List
+            const mixContainer = document.getElementById('mix-details');
+            mixContainer.innerHTML = '';
+
+            const labels = [];
+            const values = [];
+            const colors = [];
+
+            // Sort to make Petcoke first
+            const sortedMix = Object.entries(data.mix).sort((a, b) => b[1] - a[1]);
+
+            for (const [name, pct] of sortedMix) {
+                if (pct > 0.01) {
+                    const row = document.createElement('div');
+                    row.style.display = 'flex';
+                    row.style.justifyContent = 'space-between';
+                    row.style.marginBottom = '5px';
+                    row.innerHTML = `<span style="color:#aaa;">${name}</span> <span style="font-weight:bold; color:white;">${pct.toFixed(2)}%</span>`;
+                    mixContainer.appendChild(row);
+
+                    labels.push(name);
+                    values.push(pct);
+                    if (name.includes("Petcoke")) colors.push('#333'); // Dark for Base Load
+                    else colors.push('#5C8C22'); // Green for Waste
+                }
+            }
+
+            // Chart
+            const ctx = document.getElementById('mixChart').getContext('2d');
+            if (chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: ['#444', '#5C8C22', '#00A3E0', '#FF3333', '#FFA500'],
+                        borderColor: '#000',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    cutout: '70%'
+                }
+            });
+        }
+
+        // Init
+        renderWasteList();
+    </script>
+</body>
+
+</html>

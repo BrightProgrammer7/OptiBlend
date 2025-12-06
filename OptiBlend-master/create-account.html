@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail Client - OptiCem AI</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar glass">
+        <div class="logo">
+            <i class="fa-solid fa-industry" style="margin-right: 8px;"></i>OptiCem AI
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="faq.html">Support</a>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-box glass"
+            style="background: white; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <div
+                    style="width: 60px; height: 60px; background: rgba(79, 70, 229, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto;">
+                    <i class="fa-solid fa-user-shield" style="font-size: 1.8rem; color: var(--primary);"></i>
+                </div>
+                <h3>Accès Ingénieur Usine</h3>
+                <p style="color: var(--text-muted); margin-top: 5px; font-size: 0.95rem;">Connectez-vous pour accéder
+                    aux outils de simulation</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="name">Nom Complet</label>
+                    <input type="text" id="name" class="form-input" required placeholder="ex: Sarah Connor">
+                </div>
+                <div class="form-group">
+                    <label for="email">ID Usine / Email</label>
+                    <input type="email" id="email" class="form-input" required placeholder="id@cimenterie.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Jeton de Sécurité</label>
+                    <input type="password" id="password" class="form-input" required placeholder="•••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Initialiser la
+                    Session</button>
+            </form>
+
+            <p style="text-align: center; margin-top: 25px; color: var(--text-muted); font-size: 0.85rem;">
+                <i class="fa-solid fa-lock" style="margin-right: 5px;"></i> Connexion chiffrée de bout en bout
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            localStorage.setItem('user', name);
+
+            const btn = this.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Vérification des Identifiants...';
+            btn.style.opacity = '0.8';
+
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1200);
+        });
+    </script>
+</body>
+
+</html>

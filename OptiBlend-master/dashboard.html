@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holcim AI-Recipe | Unified Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #5C8C22;
+            --secondary: #00A3E0;
+            --dark: #121212;
+            --panel: #1E1E1E;
+            --text: #E0E0E0;
+            --border: #333;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background: #000;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .live-indicator {
+            background: #ff0000;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-left: 15px;
+            box-shadow: 0 0 10px #ff0000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            background: #1a1a1a;
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav button {
+            background: transparent;
+            color: #888;
+            border: none;
+            padding: 15px 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-transform: uppercase;
+            border-bottom: 3px solid transparent;
+            transition: 0.3s;
+        }
+
+        nav button:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        nav button.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Panels */
+        .grid-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .panel {
+            background: var(--panel);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .panel h2 {
+            color: var(--secondary);
+            font-size: 16px;
+            margin-top: 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        /* Data Visualization */
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 0;
+        }
+
+        .metric-label {
+            color: #aaa;
+        }
+
+        .metric-value {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        input,
+        select,
+        button.action-btn {
+            background: #2C2C2C;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            width: 100%;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button.action-btn {
+            background: var(--primary);
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button.action-btn:hover {
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <span class="material-icons" style="color: var(--primary); margin-right: 10px;">factory</span>
+        <h1>HOLCIM AI-RECIPE <span style="font-weight:300; opacity:0.7;">| UNIFIED PLATFORM</span></h1>
+        <div id="live-status" class="live-indicator" style="display:none;"></div>
+    </header>
+
+    <nav>
+        <button class="active" onclick="switchTab('tab-ops')">1. Operations (Live)</button>
+        <button onclick="switchTab('tab-sim')">2. Optimization Lab</button>
+        <button onclick="switchTab('tab-inv')">3. Inventory</button>
+    </nav>
+
+    <main>
+
+        <!-- TAP 1: OPERATIONS (LIVE) -->
+        <div id="tab-ops" class="tab-content active">
+            <div class="grid-dashboard">
+
+                <!-- Live Vision Feed Placeholder (Data Driven) -->
+                <div class="panel">
+                    <h2><span class="material-icons" style="vertical-align:bottom; font-size:18px;">videocam</span>
+                        Vision Telemetry</h2>
+                    <div id="vision-metrics">
+                        <div style="text-align:center; padding: 40px; color: #666;">
+                            Waiting for IoT Camera Signal...
+                        </div>
+                    </div>
+                    <div style="margin-top:20px; text-align:right; font-size:12px; color:#666;">
+                        Last Update: <span id="last-update">--</span>
+                    </div>
+                </div>
+
+                <!-- Real-Time Fuel Mix Strategy -->
+                <div class="panel">
+                    <h2><span class="material-icons" style="vertical-align:bottom; font-size:18px;">analytics</span>
+                        Recommended Mix</h2>
+                    <canvas id="opsMixChart" height="200"></canvas>
+                    <div id="ops-recommendations" style="margin-top:20px;"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB 2: SIMULATION (LAB) -->
+        <div id="tab-sim" class="tab-content">
+            <div class="grid-dashboard" style="grid-template-columns: 300px 1fr;">
+
+                <div class="panel">
+                    <h2>Configuration</h2>
+                    <label>Min PCI</label>
+                    <input type="number" id="sim-min-pci" value="3000">
+                    <label>Max Chlorine (%)</label>
+                    <input type="number" id="sim-max-cl" value="0.03" step="0.01">
+                    <button class="action-btn" onclick="runSimulation()">RUN SIMULATION</button>
+                </div>
+
+                <div class="panel">
+                    <h2>Simulation Results</h2>
+                    <div id="sim-results">
+                        Run a simulation to see results.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: INVENTORY -->
+        <div id="tab-inv" class="tab-content">
+            <div class="panel">
+                <h2>Warehouse Stock Levels</h2>
+                <div id="inventory-list"></div>
+                <button class="action-btn" onclick="fetchInventory()" style="width: auto; margin-top: 20px;">Refresh
+                    Data</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- WebSocket & Real-Time ---
+        const ws = new WebSocket(`ws://${location.host}/ws`);
+        let opsChart = null;
+
+        ws.onmessage = (event) => {
+            const msg = JSON.parse(event.data);
+            if (msg.type === "telemetry_update") {
+                updateOperationsDashboard(msg.data);
+            }
+        };
+
+        function updateOperationsDashboard(data) {
+            document.getElementById('live-status').style.display = 'block';
+            document.getElementById('last-update').textContent = new Date(data.timestamp * 1000).toLocaleTimeString();
+
+            // Render Vision Metrics
+            const container = document.getElementById('vision-metrics');
+            container.innerHTML = '';
+
+            const labels = [];
+            const values = [];
+
+            for (const [key, val] of Object.entries(data.vision_data)) {
+                const row = document.createElement('div');
+                row.className = 'metric-row';
+                row.innerHTML = `
+                    <span class="metric-label">${key}</span>
+                    <span class="metric-value" style="color: ${val > 0 ? '#fff' : '#444'}">${val.toFixed(2)} %</span>
+                `;
+                container.appendChild(row);
+
+                if (val > 0) {
+                    labels.push(key);
+                    values.push(val);
+                }
+            }
+
+            // Update Chart (Visualizing incoming waste stream composition)
+            const ctx = document.getElementById('opsMixChart').getContext('2d');
+            if (opsChart) opsChart.destroy();
+
+            opsChart = new Chart(ctx, {
+                type: 'bar', // Using Bar for volume/flow
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Detected Composition (%)',
+                        data: values,
+                        backgroundColor: '#5C8C22',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#333' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // --- Navigation ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (tabId === 'tab-inv') fetchInventory();
+        }
+
+        // --- Simulation Logic ---
+        async function runSimulation() {
+            const wasteData = [ // Default sandbox data
+                { name: "Tires", pci: 8000, chlorine: 0.01, sulfur: 1.5, humidity: 0.02, stock: 100 },
+                { name: "Wood", pci: 4000, chlorine: 0.02, sulfur: 0.1, humidity: 0.20, stock: 50 },
+                { name: "Sludge", pci: 1000, chlorine: 0.05, sulfur: 0.2, humidity: 0.60, stock: 200 }
+            ];
+
+            const payload = {
+                waste_data: wasteData,
+                constraints: {
+                    min_pci: parseFloat(document.getElementById('sim-min-pci').value),
+                    max_chlorine: parseFloat(document.getElementById('sim-max-cl').value),
+                    max_humidity: 0.25
+                }
+            };
+
+            const res = await fetch('/api/optimize', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+
+            document.getElementById('sim-results').innerHTML = `
+                <h3 style="color:${result.status === 'Optimal' ? '#4CAF50' : '#F44336'}">${result.status}</h3>
+                <p>Objective Value: <strong>${result.objective_value} kcal</strong></p>
+                <p>Mix: ${JSON.stringify(result.mix).replace(/"/g, '').replace(/{|}/g, '')}</p>
+            `;
+        }
+
+        // --- Inventory Logic ---
+        async function fetchInventory() {
+            const res = await fetch('/api/inventory');
+            const data = await res.json();
+            const list = document.getElementById('inventory-list');
+            list.innerHTML = '';
+            for (const [name, qty] of Object.entries(data)) {
+                const row = document.createElement('div');
+                row.className = 'metric-row';
+                row.innerHTML = `
+                    <span class="metric-label">${name}</span>
+                    <span class="metric-value">${qty.toFixed(1)} t</span>
+                `;
+                list.appendChild(row);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

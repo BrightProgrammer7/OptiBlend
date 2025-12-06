@@ -1,0 +1,11 @@
+google-genai
+fastapi
+uvicorn
+pulp
+websockets
+python-dotenv
+numpy
+scipy
+opencv-python
+ultralytics
+requests
