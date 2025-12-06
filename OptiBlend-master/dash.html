@@ -19,17 +19,41 @@
     </script>
 
     <nav class="navbar glass">
-        <div class="logo">
-            <i class="fa-solid fa-industry" style="margin-right: 8px;"></i>OptiCem AI
+        <div class="logo" style="display: flex; align-items: center;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Holcim_logo.svg/2560px-Holcim_logo.svg.png"
+                alt="Holcim" style="height: 24px; margin-right: 10px;">
+            <span>OptiBlend</span>
         </div>
         <div class="nav-links">
             <span id="welcomeMsg" style="color: var(--text-main); font-weight: 500;"></span>
-            <!-- ID Added for JS Listener -->
             <button id="logoutBtn" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.8rem;">
                 <i class="fa-solid fa-right-from-bracket"></i> Déconnexion
             </button>
         </div>
     </nav>
+
+    <!-- Sub-Navbar (Tabs) -->
+    <div class="container" style="margin-top: 100px; margin-bottom: 20px;">
+        <div class="glass"
+            style="padding: 10px 20px; border-radius: 50px; display: flex; justify-content: space-around; align-items: center; background: white; flex-wrap: wrap;">
+            <a href="/dashboard" class="btn btn-primary"
+                style="flex: 1; margin: 5px; text-align: center; white-space: nowrap;">
+                <i class="fa-solid fa-satellite-dish"></i> Opérations (Live)
+            </a>
+            <a href="optimization_lab.html" class="btn"
+                style="flex: 1; margin: 5px; text-align: center; color: var(--text-muted); background: transparent; box-shadow: none; white-space: nowrap;">
+                <i class="fa-solid fa-flask"></i> Laboratoire d'Optimisation
+            </a>
+            <a href="#" class="btn"
+                style="flex: 1; margin: 5px; text-align: center; color: var(--text-muted); background: transparent; box-shadow: none; white-space: nowrap;">
+                <i class="fa-solid fa-warehouse"></i> Inventaire
+            </a>
+            <a href="#" class="btn"
+                style="flex: 1; margin: 5px; text-align: center; color: var(--text-muted); background: transparent; box-shadow: none; white-space: nowrap;">
+                <i class="fa-solid fa-list-check"></i> Missions
+            </a>
+        </div>
+    </div>
 
     <div class="container">
         <div class="dashboard-grid">
@@ -43,6 +67,10 @@
                 <button id="exportBtn" class="btn glass" style="width: 100%; background: white;">
                     <i class="fa-solid fa-file-pdf"></i> Rapport Temps Réel
                 </button>
+                <a href="optimization_lab.html" class="btn glass"
+                    style="width: 100%; background: white; text-align: center; display: block; margin-top: 5px; text-decoration: none; color: inherit;">
+                    <i class="fa-solid fa-flask"></i> Laboratoire
+                </a>
                 <hr style="border: 0; border-top: 1px solid #e2e8f0;">
                 <div style="text-align: left; padding: 0 10px;">
                     <small

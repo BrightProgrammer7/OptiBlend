@@ -28,8 +28,8 @@ class WasteMixOptimizer:
         PETCOKE_PROPS = {
             "name": "Petcoke",
             "pci": 8200,      # High Caloric Value
-            "chlorine": 0.02, # Low Chlorine
-            "sulfur": 3.0,    # High Sulfur
+            "chlorine": 0.0005, # Low Chlorine (0.05%)
+            "sulfur": 0.04,     # High Sulfur (4.0%)
             "humidity": 0.01
         }
         

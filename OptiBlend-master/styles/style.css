@@ -193,7 +193,7 @@ section {
     grid-template-columns: repeat(4, 1fr);
     display: grid;
     gap: 24px;
-    padding-top: 120px;
+    padding-top: 10px;
 }
 
 .kpi-card {

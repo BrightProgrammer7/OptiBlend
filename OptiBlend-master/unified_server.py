@@ -72,7 +72,27 @@ manager = ConnectionManager()
 
 @app.get("/")
 def read_root():
-    return FileResponse('dashboard.html')
+    return FileResponse('index.html')
+
+@app.get("/dashboard")
+def read_dashboard():
+    return FileResponse('dash.html')
+
+@app.get("/create-account.html")
+def read_create_account():
+    return FileResponse('create-account.html')
+
+@app.get("/dash.html")
+def read_dash_direct():
+    return FileResponse('dash.html')
+
+@app.get("/dashboard.html")
+def read_dashboard_legacy():
+    return FileResponse('dash.html')
+
+@app.get("/optimization_lab.html")
+def read_optimization_lab():
+    return FileResponse('optimization_lab.html')
 
 # 1. Telemetry / IoT Endpoint
 @app.post("/api/telemetry")
@@ -129,7 +149,10 @@ async def websocket_endpoint(websocket: WebSocket):
         manager.disconnect(websocket)
 
 # Serve Static Files (mostly for optional assets, but Dashboard is served at root)
+# Serve Static Files
 app.mount("/static", StaticFiles(directory="."), name="static")
+app.mount("/styles", StaticFiles(directory="styles"), name="styles")
+app.mount("/js", StaticFiles(directory="js"), name="js")
 
 if __name__ == "__main__":
     print("Starting Unified Holcim Platform on Port 8000...")
